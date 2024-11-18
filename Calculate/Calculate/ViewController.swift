@@ -82,9 +82,8 @@ class ViewController: UIViewController {
 
     keypad.setTitle(title, for: .normal)
     keypad.titleLabel?.font = .boldSystemFont(ofSize: 30)
-
-
     keypad.backgroundColor = color
+    keypad.layer.cornerRadius = 80 / 2
 
     keypad.snp.makeConstraints() {
       $0.width.height.equalTo(80)
@@ -111,3 +110,4 @@ class ViewController: UIViewController {
 #Preview("ViewController") {
   ViewController()
 }
+

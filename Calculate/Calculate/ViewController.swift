@@ -77,10 +77,14 @@ class ViewController: UIViewController {
   // 버튼 생성
   private func makeButton(verIndex: Int, horIndex: Int) -> UIButton {
     let keypad = UIButton()
+    let title = buttonDatas[verIndex][horIndex]
+    let color = Int(title) == nil ? .orange : UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
 
-    keypad.setTitle(buttonDatas[verIndex][horIndex], for: .normal)
+    keypad.setTitle(title, for: .normal)
     keypad.titleLabel?.font = .boldSystemFont(ofSize: 30)
-    keypad.backgroundColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1.0)
+
+
+    keypad.backgroundColor = color
 
     keypad.snp.makeConstraints() {
       $0.width.height.equalTo(80)

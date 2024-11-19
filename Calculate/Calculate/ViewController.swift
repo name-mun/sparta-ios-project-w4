@@ -10,7 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController {
 
-  let label = UILabel()
+  var label = UILabel()
   var verticalStackView = UIStackView()
   let buttonDatas = [["7", "8", "9", "+"], ["4", "5", "6", "-"], ["1", "2", "3", "*"], ["AC", "0", "=", "/"]]
 
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
 
   // label 스타일 설정
   private func configureLabel() {
-    label.text = "12345"
+    label.text = "0"
     label.textColor = .white
     label.textAlignment = .right
     label.font = .boldSystemFont(ofSize: 60)
@@ -89,7 +89,23 @@ class ViewController: UIViewController {
       $0.width.height.equalTo(80)
     }
 
+    keypad.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
+
     return keypad
+  }
+
+  // 버튼 클릭시 실행
+  @objc
+  func tappedButton(_ sender: UIButton) {
+    if sender.currentTitle == "AC" {
+      label.text = "0"
+    } else {
+      if label.text == "0" {
+        label.text = sender.currentTitle
+      } else {
+        label.text! += sender.currentTitle!
+      }
+    }
   }
 
   // 레이아웃 설정

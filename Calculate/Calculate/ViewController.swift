@@ -99,6 +99,11 @@ class ViewController: UIViewController {
   func tappedButton(_ sender: UIButton) {
     if sender.currentTitle == "AC" {
       label.text = "0"
+    } else if sender.currentTitle == "=" {
+      guard let result = calculate(expression: label.text!) else {
+        return
+      }
+      label.text = "\(result)"
     } else {
       if label.text == "0" {
         label.text = sender.currentTitle
@@ -106,6 +111,41 @@ class ViewController: UIViewController {
         label.text! += sender.currentTitle!
       }
     }
+  }
+
+  // 값 계산
+  func calculate(expression: String) -> Int? {
+    // expression이 올바른 수식인지 확인
+    guard chechValidText(expression) == true else {
+      return nil
+    }
+
+    let expression = NSExpression(format: expression)
+    if let result = expression.expressionValue(with: nil, context: nil) as? Int {
+      return result
+    } else {
+      return nil
+    }
+  }
+
+  // 올바른 수식인지 확인
+  private func chechValidText(_ text: String) -> Bool {
+    let textArray = Array(text)
+    // 최근 값 저장
+    var string = [""]
+
+    for i in textArray.indices {
+      let thisString = String(textArray[i])
+      string.append(thisString)
+
+      if Int(thisString) == nil {
+        if thisString == string[string.count - 2] || (thisString != "-" && i == 0) || i == text.count - 1 {
+          return false
+        }
+      }
+    }
+
+    return true
   }
 
   // 레이아웃 설정
@@ -122,6 +162,8 @@ class ViewController: UIViewController {
     }
   }
 }
+
+
 
 #Preview("ViewController") {
   ViewController()

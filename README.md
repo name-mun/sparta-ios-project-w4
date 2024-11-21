@@ -52,4 +52,6 @@ cd sparta-ios-project-w4
 - **Cmd + R**로 실행
 <br><br>
 ## :bug: 트러블 슈팅
+👉 [StackView 정렬 오류](https://name-mun.tistory.com/37)  
+
 👉 [NSExpression format 크래시](https://name-mun.tistory.com/38)

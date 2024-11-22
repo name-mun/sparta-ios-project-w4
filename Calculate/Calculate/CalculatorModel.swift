@@ -23,7 +23,7 @@ class CalculatorModel {
   // 수식이 유효한지 확인
   private func isValidExpression(_ text: String) -> Bool {
     let textArray = Array(text)
-    var previousChar: String?
+    var previousChar: String = ""
 
     // 시작 문자가 "-"을 제외한 다른 연산 기호라면 false
     if Int(String(textArray.first!)) == nil && textArray.first != "-" {
@@ -38,12 +38,12 @@ class CalculatorModel {
     for char in textArray {
       let currentChar = String(char)
 
-      if Int(currentChar) == nil {
-        // 연산 기호가 연속으로 나오면 false
-        if currentChar == previousChar {
-          return false
-        }
+      // 연산 기호가 연속으로 나오면 false
+      if Int(currentChar) == nil && Int(previousChar) == nil {
+        return false
       }
+
+      previousChar = currentChar
     }
 
     return true
